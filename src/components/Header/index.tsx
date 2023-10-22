@@ -29,7 +29,7 @@ export default function Header() {
           </li>
           <li className="text-white text-opacity-[0.9] flex flex-row content-center justify-center gap-1 pt-1 hover:underline hover:cursor-pointer">
             <IconPhone size={22} color="white" />
-            <a href="tel:3212780197">321 278 0197</a>
+            <a href="tel:3224450492">3224450492</a>
           </li>
         </ul>
         <figure className="lg:flex lg:justify-end gap-3 pt-1 hidden">

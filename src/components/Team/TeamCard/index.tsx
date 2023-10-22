@@ -1,31 +1,32 @@
-import { IconBooks } from "@tabler/icons-react";
+import { IconBooks, IconBuilding } from "@tabler/icons-react";
 
 type Doctor = {
   name: string;
-  imageUrl: string;
   profession: string;
   university: string;
+  rol?: string;
 };
 
-function TeamCard({ name, imageUrl, profession, university }: Doctor) {
+function TeamCard({ name, profession, university, rol }: Doctor) {
   return (
-    <li className="snap-start min-w-full sm:min-w-[50%] md:min-w-[30%] lg:min-w-[20%]">
-      <div className="p-8 border border-solid border-gray-300 rounded text-center min-h-full">
-        <div className="flex justify-center gap-3 items-center border rounded overflow-hidden mb-6">
-          <img
-            src={imageUrl}
-            alt="Doctor 1"
-            className="w-full h-full object-cover"
-          />
+    <div className="p-8 border border-solid border-gray-300 rounded text-center min-h-full">
+      <h3 className="text-xl font-bold text-primary">{name}</h3>
+      <p className="text-secondary mt-3 mx-3 font-semibold">{profession}</p>
+      <section className="mt-4 border-t-2">
+        <div className="flex items-center justify-center my-2">
+          <IconBuilding size={20} color="#00173d" />
+          <p className="mx-3 text-xs">{university}</p>
         </div>
-        <h3 className="text-2xl font-bold text-primary">{name}</h3>
-        <p className="text-secondary mt-3 mx-3 font-semibold">{profession}</p>
-        <div className="flex items-center justify-center">
-          <IconBooks size={24} color="#00173d" />
-          <p className="text-secondary mx-3">{university}</p>
-        </div>
-      </div>
-    </li>
+        {!!rol ? (
+          <div className="flex items-center justify-center">
+            <IconBooks size={20} color="#00173d" />
+            <p className="mx-3 text-xs">{rol}</p>
+          </div>
+        ) : (
+          ""
+        )}
+      </section>
+    </div>
   );
 }
 
