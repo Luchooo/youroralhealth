@@ -1,4 +1,3 @@
-import "./style.css";
 import TeamCard from "./TeamCard";
 
 function Team() {
@@ -11,33 +10,37 @@ function Team() {
         <h2 className="text-center mb-14 text-4xl text-primary font-bold">
           Dentistas expertos
         </h2>
-        <ul className="has-scrollbar">
-          <TeamCard
-            name="Dr. Alex Rubio"
-            profession="Odontológo"
-            imageUrl="./img/doctor-1.webp"
-            university="Universidad del Bosque"
-          />
-          <TeamCard
-            name="Dra. Johana Umbarila"
-            profession="Odontológa"
-            imageUrl="./img/doctor-2.webp"
-            university="Universidad del Bosque"
-          />
-          <TeamCard
-            name="Dr. Fernando Alvés"
-            profession="Odontológo"
-            imageUrl="./img/doctor-3.webp"
-            university="Universidad del Bosque"
-          />
-          <TeamCard
-            name="Dra. Alba Caicedo"
-            profession="Odontológa"
-            imageUrl="./img/doctor-4.webp"
-            university="Universidad del Bosque"
-          />
-        </ul>
       </div>
+      <section className="flex flex-wrap gap-4 justify-center mx-6">
+        <TeamCard
+          name="Dalia Eslava"
+          profession="Odontológa General"
+          university="Colegio Odontológico"
+          rol="Énfasis Periodoncia"
+        />
+        <TeamCard
+          name="Alba Caicedo"
+          profession="Odontológa General"
+          university="Universidad del Bosque"
+          rol="Gerente en servios de Salud"
+        />
+        <TeamCard
+          name="Johana Umbarila"
+          profession="Odontológa General"
+          university="UNICOC"
+          rol="Énfasis Periodoncia"
+        />
+        <TeamCard
+          name="Maria Montealegre"
+          profession="Prostodoncista"
+          university="Universidad del Bosque"
+        />
+        <TeamCard
+          name="Monica Suarez"
+          profession="Periodoncista"
+          university="Colegio Odontológico"
+        />
+      </section>
     </section>
   );
 }

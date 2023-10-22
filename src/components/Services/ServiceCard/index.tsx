@@ -6,17 +6,19 @@ type Card = {
 
 function ServiceCard({ title, text, imageUrl }: Card) {
   return (
-    <li className="list-none">
-      <div className="flex justify-start gap-8 min-h-full border border-solid border-gray-300 rounded p-7">
-        <div className="w-14 shrink-0">
-          <img src={imageUrl} width="100" height="100" className="w-full" />
-        </div>
-        <div>
-          <h3 className="text-2xl font-extrabold mb-2 text-primary">{title}</h3>
-          <p className="leading-7 text-gray-500">{text}</p>
-        </div>
+    <div className="xl:w-1/4 md:w-1/2 p-4">
+      <div className="bg-gray-100 p-6 rounded-lg">
+        <img
+          className="h-40 rounded w-full object-cover object-center mb-6"
+          src={imageUrl}
+          alt="content"
+        />
+        <h2 className="text-lg text-secondary font-medium title-font mb-4">
+          {title}
+        </h2>
+        <p className="leading-relaxed text-base">{text}</p>
       </div>
-    </li>
+    </div>
   );
 }
 

@@ -1,4 +1,4 @@
-import { IconClockHour4, IconMapPin, IconPhone } from "@tabler/icons-react";
+import { IconClockHour4, IconMail, IconMapPin, IconPhone } from "@tabler/icons-react";
 
 function Footer() {
   return (
@@ -45,8 +45,17 @@ function Footer() {
               <span className="bg-gradient-to-tr from-blue-400 to-blue-600 h-10 w-10 text-white rounded-full flex justify-center items-center">
                 <IconPhone color="white" />
               </span>
-              <div className="hover:underline hover:cursor-pointer">
-                <a href="tel:3212780197">321 278 0197</a>
+              <div>
+                <a className="hover:underline hover:cursor-pointer" href="tel:3212780197">3212780197</a> {" - "}
+                <a className="hover:underline hover:cursor-pointer" href="tel:6014595555">6014595555</a>
+              </div>
+            </li>
+            <li className="text-gray-300 flex gap-5 items-center mt-5">
+              <span className="bg-gradient-to-tr from-blue-400 to-blue-600 h-10 w-10 text-white rounded-full flex justify-center items-center">
+                <IconMail color="white" />
+              </span>
+              <div className="hover:underline hover:cursor-pointer" >
+                <a href="mailto:oralhealthurgencias@gmail.com">oralhealthurgencias@gmail.com</a>
               </div>
             </li>
           </ul>
