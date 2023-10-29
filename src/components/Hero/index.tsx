@@ -4,7 +4,7 @@ export const Hero = () => {
   return (
     <section className="bg-gradient-to-b from-white to-blue-200">
       <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
-        <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
+        <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center sm:ml-10">
           <h2 className="text-secondary text-3xl font-bold hidden sm:block mb-4">
             Bienvenido a
           </h2>

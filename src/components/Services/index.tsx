@@ -5,12 +5,9 @@ function Services() {
     <>
       <section className="pt-32 pb-0">
         <div className="container mx-auto p-6">
-          <p className="text-center text-2xl text-secondary font-extrabold uppercase mb-3">
+          <p className="text-center text-3xl text-secondary font-extrabold uppercase">
             Nuestros servicios
           </p>
-          <h2 className="text-center text-4xl text-primary font-bold">
-            Lo que ofrecemos
-          </h2>
         </div>
       </section>
       <section className="text-gray-600 body-font">
