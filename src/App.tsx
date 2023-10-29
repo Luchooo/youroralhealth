@@ -6,6 +6,7 @@ import Team from "./components/Team";
 import Cta from "./components/Cta";
 import Footer from "./components/Footer";
 import ButtonWhatsApp from "./components/ButtonWhatsApp";
+import Domicile from "./components/Domicile";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Header />
       <Hero />
       <Services />
+      <Domicile />
       <Team />
       <Cta />
       <Footer />
