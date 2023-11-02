@@ -13,19 +13,19 @@ function Team() {
           name="Alba Caicedo"
           profession="Odontológa General"
           university="Universidad del Bosque"
-          rol="Gerente en servios de Salud"
+          rol="Gerente en servios de Salud y Auditoría"
         />
         <TeamCard
           name="Dalia Eslava"
           profession="Odontológa General"
           university="Colegio Odontológico"
-          rol="Énfasis Periodoncia"
+          rol="Énfasis en Odontología Biológica y Quirúrgica"
         />
         <TeamCard
           name="Johana Umbarila"
           profession="Odontológa General"
           university="UNICOC"
-          rol="Énfasis Periodoncia"
+          rol="Énfasis en Odontología Biológica y Quirúrgica"
         />
         <TeamCard
           name="Maria Montealegre"

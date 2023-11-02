@@ -1,4 +1,6 @@
 import { IconBooks, IconBuilding } from "@tabler/icons-react";
+import "./style.css"
+
 
 type Doctor = {
   name: string;
@@ -20,7 +22,7 @@ function TeamCard({ name, profession, university, rol }: Doctor) {
         {!!rol ? (
           <div className="flex items-center justify-center">
             <IconBooks size={20} color="#00173d" />
-            <p className="mx-3 text-xs">{rol}</p>
+            <p className="mx-3 text-balance text-xs">{rol}</p>
           </div>
         ) : (
           ""
