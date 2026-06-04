@@ -26,7 +26,7 @@ function Services() {
               imageUrl={"./img/service-2.webp"}
             />
             <ServiceCard
-              title={"odontologia general"}
+              title={"Odontología general"}
               text={"Recupera dientes perdidos y disfruta de una sonrisa completa."}
               imageUrl={"./img/service-3.webp"}
             />
