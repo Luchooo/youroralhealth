@@ -1,6 +1,5 @@
 import { IconBooks, IconBuilding } from "@tabler/icons-react";
-import "./style.css"
-
+import "./style.css";
 
 type Doctor = {
   name: string;
@@ -11,10 +10,10 @@ type Doctor = {
 
 function TeamCard({ name, profession, university, rol }: Doctor) {
   return (
-    <div className="p-8 border border-solid border-gray-300 rounded text-center h-52 w-72 flex flex-col items-center justify-center">
+    <div className="p-8 border border-solid border-gray-300 rounded text-center h-52 w-full flex flex-col items-center justify-center">
       <h3 className="text-xl font-bold text-primary">{name}</h3>
       <p className="text-secondary mt-3 mx-3 font-semibold">{profession}</p>
-      <section className="mt-4 border-t-2">
+      <section className="mt-4 border-t-2 w-full">
         <div className="flex items-center justify-center my-2">
           <IconBuilding size={20} color="#00173d" />
           <p className="mx-3 text-xs">{university}</p>

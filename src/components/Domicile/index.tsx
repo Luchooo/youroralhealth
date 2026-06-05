@@ -16,14 +16,25 @@ function Domicile() {
             <div className="flex h-full items-center rounded-lg bg-[#0e264f] p-6 text-center text-white lg:pl-12 lg:text-left">
               <div className="lg:pl-12">
                 <h2 className="mb-6 text-3xl font-bold">
-                  Atención domiciliaria
-                </h2>
-                <p className="mb-6 pb-2 lg:pb-0">
-                  Brindamos atención dental a domicilio. Nuestro equipo
-                  profesional se desplaza a tu hogar para ofrecer servicios
-                  dentales personalizados y convenientes. Tu sonrisa es nuestra
-                  prioridad.
-                </p>
+  Odontología General
+</h2>
+<p className="mb-2 font-semibold text-lg">
+  Cuidamos tu salud bucal de forma integral.
+</p>
+<p className="mb-4 pb-2 lg:pb-0 text-sm leading-relaxed">
+  Nuestra atención en odontología general cubre el diagnóstico, 
+  prevención y tratamiento de las enfermedades más comunes de la 
+  boca, dientes y encías. Realizamos limpiezas profesionales, 
+  obturaciones (calzas), extracciones, tratamientos de conductos 
+  y revisiones periódicas para mantener tu boca en óptimas 
+  condiciones.
+</p>
+<p className="pb-2 lg:pb-0 text-sm leading-relaxed">
+  Contamos con profesionales altamente capacitados que utilizan 
+  tecnología de vanguardia para ofrecerte un diagnóstico preciso 
+  y un tratamiento cómodo y seguro. Agenda tu cita hoy y da el 
+  primer paso hacia una sonrisa saludable.
+</p>
               </div>
             </div>
           </div>

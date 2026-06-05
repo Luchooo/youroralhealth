@@ -41,14 +41,21 @@ function Footer() {
                 </a>
               </div>
             </li>
-            <li className="text-gray-300 flex gap-5 items-center mt-5">
-              <span className="bg-gradient-to-tr from-blue-400 to-blue-600 h-10 w-10 text-white rounded-full flex justify-center items-center">
+          <li className="text-gray-300 flex gap-5 items-center mt-5">
+              <span className="bg-gradient-to-tr from-blue-400 to-blue-600 h-10 w-10 text-white rounded-full flex justify-center items-center shrink-0">
                 <IconPhone color="white" />
               </span>
-              <div>
-                <a className="hover:underline hover:cursor-pointer" href="tel:3212780197">3212780197</a> {" - "}
-                <a className="hover:underline hover:cursor-pointer" href="tel:6014595555">6014595555</a>
+              <div className="flex gap-4">
+                <a className="hover:underline hover:cursor-pointer" href="tel:3212780197">321 278 01 97</a>
+                <span>-</span>
+                <a className="hover:underline hover:cursor-pointer" href="tel:3102500047">310 250 00 47</a>
               </div>
+            </li>
+            <li className="text-gray-300 flex gap-5 items-center mt-5">
+              <span className="bg-gradient-to-tr from-blue-400 to-blue-600 h-10 w-10 text-white rounded-full flex justify-center items-center shrink-0">
+                <IconPhone color="white" />
+              </span>
+              <a className="hover:underline hover:cursor-pointer" href="tel:6015257572">601 525 75 72</a>
             </li>
             <li className="text-gray-300 flex gap-5 items-center mt-5">
               <span className="bg-gradient-to-tr from-blue-400 to-blue-600 h-10 w-10 text-white rounded-full flex justify-center items-center">

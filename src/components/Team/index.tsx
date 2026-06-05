@@ -4,7 +4,7 @@ const teamData = [
 	{
 		name: 'Alba Caicedo',
 		profession: 'Odontóloga General',
-		university: 'Universidad del Bosque',
+		university: 'Universidad sergio arboleda',
 		rol: 'Gerente en servicios de Salud y Auditoría',
 	},
 	{
@@ -13,9 +13,9 @@ const teamData = [
 		university: 'Colegio Odontológico',
 	},
 	{
-		name: 'Oriana Arrieta',
-		profession: 'Odontóloga General',
-		university: 'Universidad del Atlántico',
+		name: 'Jorge Alarcón',
+		profession: 'Cirujano dental',
+		university: 'Universidad Nacional',
 	},
 	{
 		name: 'Maria Montealegre',
@@ -23,14 +23,14 @@ const teamData = [
 		university: 'Universidad del Bosque',
 	},
 	{
-		name: 'Ana Contreras',
-		profession: 'Cirujana Maxilofacial',
-		university: 'Universidad Javeriana',
+		name: 'Daniel Hernandez',
+		profession: 'Odontólogo Estético y Restaurador',
+		university: 'Universidad Nacional',
 	},
 	{
-		name: 'Andrea Arias',
-		profession: 'Ortodoncista',
-		university: 'Universidad Antonio Nariño',
+		name: 'Julian porras',
+		profession: 'Endodoncista',
+		university: 'Universidad Nacional',
 	},
 	{
 		name: 'Ximena Torres',
@@ -38,9 +38,9 @@ const teamData = [
 		university: 'Universidad del Bosque',
 	},
 	{
-		name: 'Monica Suarez',
-		profession: 'Periodoncista',
-		university: 'Colegio Odontológico',
+		name: 'Juan Sebastian Álvarez',
+		profession: 'Cirugía Maxilofacial',
+		university: 'Universidad del Bosque',
 	},
 ];
 
@@ -52,7 +52,7 @@ function Team() {
 					Nuestros doctores
 				</p>
 			</div>
-			<section className="flex flex-wrap gap-4 justify-center mx-6">
+			<section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mx-auto max-w-7xl px-6">
 				{teamData.map((doctor, index) => (
 					<TeamCard
 						key={index}

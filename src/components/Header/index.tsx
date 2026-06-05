@@ -31,16 +31,20 @@ export default function Header() {
               <address>Calle 150 # 21a - 14, Bogotá.</address>
             </a>
           </li>
-          <li className="flex flex-col sm:flex-row sm:gap-8">
-            <div className="text-white text-opacity-[0.9] flex flex-row content-center justify-center gap-1 pt-1 hover:underline hover:cursor-pointer">
-              <IconPhone size={22} color="white" />
-              <a href="tel:3224450492">3224450492</a>
-            </div>
-            <div className="text-white text-opacity-[0.9] flex flex-row content-center justify-center gap-1 pt-1 hover:underline hover:cursor-pointer">
-              <IconPhone size={22} color="white" />
-              <a href="tel:3212780197">3212780197</a>
-            </div>
-          </li>
+        <li className="flex flex-col sm:flex-row sm:gap-4">
+  <div className="text-white text-opacity-[0.9] flex flex-row content-center justify-center gap-1 pt-1 hover:underline hover:cursor-pointer">
+    <IconPhone size={22} color="white" />
+    <a href="tel:3212780197">321 278 01 97</a>
+  </div>
+  <div className="text-white text-opacity-[0.9] flex flex-row content-center justify-center gap-1 pt-1 hover:underline hover:cursor-pointer">
+    <IconPhone size={22} color="white" />
+    <a href="tel:3102500047">310 250 00 47</a>
+  </div>
+  <div className="text-white text-opacity-[0.9] flex flex-row content-center justify-center gap-1 pt-1 hover:underline hover:cursor-pointer">
+    <IconPhone size={22} color="white" />
+    <a href="tel:6015257572">601 525 75 72</a>
+  </div>
+</li>
         </ul>
         <figure className="lg:flex lg:justify-end gap-3 pt-1 hidden">
           <a
