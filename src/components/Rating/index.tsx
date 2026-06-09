@@ -24,15 +24,15 @@ function Rating() {
     setFormState("submitting");
 
     try {
-      await emailjs.send(
-        "service_wpt66m6",
-        "template_e05fqhk",
+       await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
         {
           nombre: name,
           estrellas: `${rating} / 5 - ${labels[rating]}`,
           comentario: comment || "Sin comentario",
         },
-        "faqP1NGM7YG1hWS7h"
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
       );
       setFormState("success");
     } catch (error) {
