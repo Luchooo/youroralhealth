@@ -25,7 +25,7 @@ export default function Header() {
             <IconMapPin size={22} color="white" />
             <a
               target={"_blank"}
-              href="https://maps.app.goo.gl/mK9MMz4ntG538pWq6"
+              href="https://maps.app.goo.gl/63NsR3npHT3XPBkP6"
               rel="noreferrer"
             >
               <address>Calle 150 # 21a - 14, Bogotá.</address>

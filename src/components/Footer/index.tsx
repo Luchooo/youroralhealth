@@ -34,7 +34,7 @@ function Footer() {
               <div className="hover:underline hover:cursor-pointer">
                 <a
                   target={"_blank"}
-                  href="https://maps.app.goo.gl/mK9MMz4ntG538pWq6"
+                  href="https://maps.app.goo.gl/63NsR3npHT3XPBkP6"
                   rel="noreferrer"
                 >
                   Calle 150 # 21a - 14, Bogotá
