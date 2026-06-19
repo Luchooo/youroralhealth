@@ -17,6 +17,53 @@ type Review = {
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
+function ReviewCard({ review }: { review: Review }) {
+  const [expanded, setExpanded] = useState(false);
+  const isLong = review.Comentario.length > 120;
+
+  return (
+    <div className="bg-white rounded-2xl px-6 py-5 shadow-md hover:shadow-xl transition-shadow duration-300 border border-gray-100 w-full min-w-0 overflow-hidden">
+      <div className="flex items-start gap-4">
+        <div className="bg-secondary text-white font-bold rounded-full h-10 w-10 flex items-center justify-center text-sm shrink-0">
+          {review.Nombre.charAt(0).toUpperCase()}
+        </div>
+        <div className="min-w-0 flex-1">
+          <div className="flex items-center justify-between flex-wrap gap-1 mb-1">
+            <p className="font-bold text-gray-900 text-sm leading-tight truncate">{review.Nombre}</p>
+            <p className="text-gray-400 text-xs shrink-0">
+              {new Date(review.created_at).toLocaleDateString("es-CO", {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+              })}
+            </p>
+          </div>
+          <div className="flex gap-1 mb-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <IconStarFilled
+                key={star}
+                size={15}
+                className={star <= review.Estrellas ? "text-yellow-400" : "text-gray-200"}
+              />
+            ))}
+          </div>
+          <p className="text-gray-600 text-sm leading-relaxed italic break-words whitespace-normal">
+            "{expanded || !isLong ? review.Comentario : review.Comentario.slice(0, 120) + "..."}"
+          </p>
+          {isLong && (
+            <button
+              onClick={() => setExpanded(!expanded)}
+              className="text-secondary text-xs font-semibold mt-1 hover:underline"
+            >
+              {expanded ? "Ver menos" : "Ver más"}
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Rating() {
   const [rating, setRating] = useState<number>(0);
   const [hovered, setHovered] = useState<number>(0);
@@ -24,6 +71,7 @@ function Rating() {
   const [comment, setComment] = useState("");
   const [formState, setFormState] = useState<FormState>("idle");
   const [reviews, setReviews] = useState<Review[]>([]);
+  const [showAll, setShowAll] = useState(false);
 
   const labels: Record<number, string> = {
     1: "Muy malo",
@@ -70,9 +118,11 @@ function Rating() {
     }
   };
 
+  const visibleReviews = showAll ? reviews : reviews.slice(0, 4);
+
   return (
     <section className="mt-24 mb-16 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         <p className="text-center text-3xl text-secondary font-extrabold uppercase mb-2">
           Lo que dicen nuestros pacientes
         </p>
@@ -80,7 +130,6 @@ function Rating() {
           Tu experiencia es muy importante para nosotros. Comparte cómo fue tu atención en Your Oral Health.
         </p>
 
-        {/* Formulario */}
         <div className="bg-white rounded-2xl p-8 shadow-lg mb-12 max-w-xl mx-auto">
           <div className="flex justify-center gap-2 mb-2">
             {[1, 2, 3, 4, 5].map((star) => (
@@ -142,32 +191,25 @@ function Rating() {
           </button>
         </div>
 
-        {/* Reseñas publicadas */}
         {reviews.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {reviews.map((review) => (
-              <div key={review.id} className="bg-white rounded-2xl p-6 shadow-md">
-                <div className="flex gap-1 mb-2">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <IconStarFilled
-                      key={star}
-                      size={18}
-                      className={star <= review.Estrellas ? "text-yellow-400" : "text-gray-200"}
-                    />
-                  ))}
-                </div>
-                <p className="font-bold text-gray-800 mb-1">{review.Nombre}</p>
-                <p className="text-gray-600 text-sm">{review.Comentario}</p>
-                <p className="text-gray-400 text-xs mt-3">
-                  {new Date(review.created_at).toLocaleDateString("es-CO", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
+          <>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+              {visibleReviews.map((review) => (
+                <ReviewCard key={review.id} review={review} />
+              ))}
+            </div>
+
+            {reviews.length > 4 && (
+              <div className="text-center mt-8">
+                <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="border-2 border-secondary text-secondary hover:bg-secondary hover:text-white font-bold py-3 px-10 rounded-lg uppercase tracking-wider transition"
+                >
+                  {showAll ? "Ver menos" : `Ver todas las reseñas (${reviews.length})`}
+                </button>
               </div>
-            ))}
-          </div>
+            )}
+          </>
         )}
       </div>
     </section>
