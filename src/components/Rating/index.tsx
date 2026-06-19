@@ -1,6 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import { IconStar, IconStarFilled } from "@tabler/icons-react";
-import emailjs from "@emailjs/browser";
+import { createClient } from "@supabase/supabase-js";
+
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
+
+type Review = {
+  id: number;
+  Nombre: string;
+  Estrellas: number;
+  Comentario: string;
+  created_at: string;
+};
 
 type FormState = "idle" | "submitting" | "success" | "error";
 
@@ -10,6 +23,7 @@ function Rating() {
   const [name, setName] = useState("");
   const [comment, setComment] = useState("");
   const [formState, setFormState] = useState<FormState>("idle");
+  const [reviews, setReviews] = useState<Review[]>([]);
 
   const labels: Record<number, string> = {
     1: "Muy malo",
@@ -19,120 +33,142 @@ function Rating() {
     5: "¡Perfecto!",
   };
 
+  useEffect(() => {
+    fetchReviews();
+  }, []);
+
+  const fetchReviews = async () => {
+    const { data } = await supabase
+      .from("reviews")
+      .select("*")
+      .eq("Aprobado", true)
+      .order("created_at", { ascending: false });
+    if (data) setReviews(data);
+  };
+
   const handleSubmit = async () => {
     if (!rating || !name.trim()) return;
     setFormState("submitting");
-
     try {
-       await emailjs.send(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      const { error } = await supabase.from("reviews").insert([
         {
-          nombre: name,
-          estrellas: `${rating} / 5 - ${labels[rating]}`,
-          comentario: comment || "Sin comentario",
+          Nombre: name,
+          Estrellas: rating,
+          Comentario: comment || "Sin comentario",
+          Aprobado: true,
         },
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY
-      );
+      ]);
+      if (error) throw error;
       setFormState("success");
+      setRating(0);
+      setName("");
+      setComment("");
+      fetchReviews();
     } catch (error) {
       console.error(error);
       setFormState("error");
     }
   };
 
-  if (formState === "success") {
-    return (
-      <section className="mt-24 mb-44 px-6">
-        <div className="max-w-xl mx-auto text-center bg-white rounded-2xl p-12 shadow-lg">
-          <div className="text-5xl mb-4">🦷</div>
-          <h3 className="text-2xl font-extrabold text-primary mb-2">
-            ¡Gracias por tu calificación!
-          </h3>
-          <p className="text-gray-500 text-sm">
-            Tu opinión nos ayuda a seguir mejorando nuestros servicios.
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   return (
-    <section className="mt-24 mb-44 px-6">
-      <div className="max-w-xl mx-auto">
+    <section className="mt-24 mb-16 px-6">
+      <div className="max-w-4xl mx-auto">
         <p className="text-center text-3xl text-secondary font-extrabold uppercase mb-2">
-          Califica nuestro servicio
+          Lo que dicen nuestros pacientes
         </p>
-        <p className="text-center text-gray-400 text-sm mb-10">
-          Tu opinión es muy importante para nosotros
+        <p className="text-center text-gray-500 text-sm mb-10">
+          Tu experiencia es muy importante para nosotros. Comparte cómo fue tu atención en Your Oral Health.
         </p>
 
-        <div className="bg-white rounded-2xl p-8 shadow-lg flex flex-col gap-6">
-          {/* Estrellas */}
-          <div className="flex flex-col items-center gap-2">
-            <div className="flex gap-1">
-              {Array.from({ length: 5 }, (_, i) => i + 1).map((star) => (
-                <button
-                  key={star}
-                  onClick={() => setRating(star)}
-                  onMouseEnter={() => setHovered(star)}
-                  onMouseLeave={() => setHovered(0)}
-                  className="transition-transform hover:scale-110 focus:outline-none"
-                  aria-label={`Calificar con ${star} estrella${star > 1 ? 's' : ''}`}
-                >
-                  {star <= (hovered || rating) ? (
-                    <IconStarFilled size={28} className="text-yellow-400" />
-                  ) : (
-                    <IconStar size={28} className="text-gray-300" />
-                  )}
-                </button>
-              ))}
-            </div>
-            <p className="text-sm font-semibold text-secondary h-5">
-              {hovered || rating ? labels[hovered || rating] : ""}
-            </p>
+        {/* Formulario */}
+        <div className="bg-white rounded-2xl p-8 shadow-lg mb-12 max-w-xl mx-auto">
+          <div className="flex justify-center gap-2 mb-2">
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                onClick={() => setRating(star)}
+                onMouseEnter={() => setHovered(star)}
+                onMouseLeave={() => setHovered(0)}
+              >
+                {star <= (hovered || rating) ? (
+                  <IconStarFilled size={32} className="text-yellow-400" />
+                ) : (
+                  <IconStar size={32} className="text-yellow-400" />
+                )}
+              </button>
+            ))}
           </div>
-
-          {/* Nombre */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-primary uppercase tracking-wide">
-              Tu nombre
-            </label>
+          {rating > 0 && (
+            <p className="text-center text-secondary font-semibold mb-4">
+              {labels[rating]}
+            </p>
+          )}
+          <div className="mb-4">
+            <label className="text-xs font-bold text-gray-500 uppercase">Tu nombre</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder="¿Cómo te llamas?"
-              className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-secondary transition-colors"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
-
-          {/* Comentario */}
-          <div className="flex flex-col gap-1">
-            <label className="text-xs font-semibold text-primary uppercase tracking-wide">
-              Comentario{" "}
-              <span className="text-gray-400 normal-case font-normal">
-                (opcional)
-              </span>
+          <div className="mb-6">
+            <label className="text-xs font-bold text-gray-500 uppercase">
+              Comentario <span className="font-normal">(opcional)</span>
             </label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder="Cuéntanos tu experiencia..."
               rows={3}
-              className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-secondary transition-colors resize-none"
+              className="w-full border border-gray-300 rounded-lg px-4 py-2 mt-1 focus:outline-none focus:ring-2 focus:ring-blue-400"
             />
           </div>
-
-          {/* Botón */}
+          {formState === "success" && (
+            <p className="text-green-500 text-center text-sm mb-4">
+              ✅ ¡Gracias! Tu reseña ha sido publicada.
+            </p>
+          )}
+          {formState === "error" && (
+            <p className="text-red-500 text-center text-sm mb-4">
+              ❌ Hubo un error. Intenta de nuevo.
+            </p>
+          )}
           <button
             onClick={handleSubmit}
-            disabled={!rating || !name.trim() || formState === "submitting"}
-            className="bg-secondary text-white font-bold py-3 rounded-lg text-sm uppercase tracking-wide transition-opacity disabled:opacity-40 hover:opacity-90"
+            disabled={formState === "submitting"}
+            className="w-full bg-secondary hover:bg-blue-700 text-white font-bold py-3 rounded-lg uppercase tracking-wider transition"
           >
-            {formState === "submitting" ? "Enviando..." : "Enviar calificación"}
+            {formState === "submitting" ? "Enviando..." : "Publicar reseña"}
           </button>
         </div>
+
+        {/* Reseñas publicadas */}
+        {reviews.length > 0 && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {reviews.map((review) => (
+              <div key={review.id} className="bg-white rounded-2xl p-6 shadow-md">
+                <div className="flex gap-1 mb-2">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <IconStarFilled
+                      key={star}
+                      size={18}
+                      className={star <= review.Estrellas ? "text-yellow-400" : "text-gray-200"}
+                    />
+                  ))}
+                </div>
+                <p className="font-bold text-gray-800 mb-1">{review.Nombre}</p>
+                <p className="text-gray-600 text-sm">{review.Comentario}</p>
+                <p className="text-gray-400 text-xs mt-3">
+                  {new Date(review.created_at).toLocaleDateString("es-CO", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </p>
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );
